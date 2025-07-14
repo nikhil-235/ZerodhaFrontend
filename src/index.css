@@ -11,3 +11,82 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Footer a{
+    text-decoration: none;
+    color: #0008;
+
+}
+
+.Footer a li{
+    margin-top: .8rem;
+}
+
+.links{
+    text-align: center;
+}
+
+.links a{
+    text-decoration: none;
+    color:#000c;
+    margin: .6rem;
+
+}
+
+/* .navbar-nav li:hover{
+  border-bottom: .1px solid #0008;
+
+} */
+
+.images img{
+  width:50%;
+  margin-top: 3rem;
+
+}
+
+.images p{
+  margin-top:1rem;
+  font-size: 14px;
+}
+
+.pricing img{
+  width: 70%;
+}
+.pricing h1{
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+.pricing p{
+  margin-top:1rem;
+  line-height: 1.5rem;
+}
+
+.Brokerage li{
+  padding-top:1rem;
+  font-size: .92rem;
+}
+
+
+.support-links a li{
+  list-style-type: none;
+  padding:.6rem;
+  font-size:.9rem;
+}
+
+.support-links a {
+  text-decoration: none;
+}
+.support-hero-links a {
+  color:white;
+  padding-right: 1rem;
+}
+
+.box-white{
+  height: 3.5rem;
+  width: 80%;
+  line-height: 3.5rem;
+  border-radius: .7rem;
+  background-color: white;
+  font-size:1rem;
+  
+}
