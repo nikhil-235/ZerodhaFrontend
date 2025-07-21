@@ -31,13 +31,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/login",
+        "http://localhost:8080/login",
         {
           ...inputValue,
         },
         { withCredentials: true }
       );
-      console.log(data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
@@ -70,7 +69,7 @@ const Login = () => {
               value={email}
               placeholder="Enter your email"
               onChange={handleOnChange}
-            />
+             required/>
           </div>
           <div>
             <label htmlFor="password">Password</label>
@@ -80,7 +79,7 @@ const Login = () => {
               value={password}
               placeholder="Enter your password"
               onChange={handleOnChange}
-            />
+             required/>
           </div>
           <button type="submit">Submit</button>
           <span>

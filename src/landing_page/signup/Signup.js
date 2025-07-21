@@ -39,6 +39,7 @@ const Signup = () => {
         },
         { withCredentials: true }
       );
+      console.log(data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
@@ -72,7 +73,7 @@ const Signup = () => {
               value={email}
               placeholder="Enter your email"
               onChange={handleOnChange}
-            />
+            required/>
           </div>
           <div>
             <label htmlFor="email">Username</label>
@@ -82,7 +83,7 @@ const Signup = () => {
               value={username}
               placeholder="Enter your username"
               onChange={handleOnChange}
-            />
+             required/>
           </div>
           <div>
             <label htmlFor="password">Password</label>
@@ -92,7 +93,7 @@ const Signup = () => {
               value={password}
               placeholder="Enter your password"
               onChange={handleOnChange}
-            />
+            required/>
           </div>
           <button type="submit">Submit</button>
           <span>
@@ -106,3 +107,5 @@ const Signup = () => {
 };
 
 export default Signup;
+
+

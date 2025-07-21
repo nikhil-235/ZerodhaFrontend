@@ -1,16 +1,53 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Navbar() {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check authentication status on component mount and when cookies change
+  useEffect(() => {
+    setIsAuthenticated(!!cookies.token);
+  }, [cookies.token]);
 
   const handleNavCollapse = () => {
     setIsNavCollapsed(!isNavCollapsed);
   };
 
   const closeNavbar = () => {
-    if (window.innerWidth < 992) { // lg breakpoint (Bootstrap default)
+    if (window.innerWidth < 992) {
       setIsNavCollapsed(true);
+    }
+  };
+
+  const handleLogout = async () => {
+    closeNavbar();
+    try {
+      // Optional: Send logout request to backend to invalidate token
+      // await axios.post('http://localhost:8080/logout', {}, {
+      //   withCredentials: true
+      // });
+      
+      // Remove token cookie
+      removeCookie('token', { path: '/' });
+      
+      // Update authentication state
+      setIsAuthenticated(false);
+      
+      // Show success message
+      toast.success("Logged out successfully");
+      
+      // Redirect to home page
+      navigate('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error("Failed to logout");
     }
   };
 
@@ -38,15 +75,30 @@ function Navbar() {
         >
           <form className="d-flex" role="search">
             <ul className="navbar-nav ms-lg-5 ps-lg-5">
-              <li className="nav-item px-lg-2">
-                <Link 
-                  className="nav-link"
-                  to="/signup"
-                  onClick={closeNavbar}
-                >
-                  Signup
-                </Link>
-              </li>
+              {/* Conditional render for Signup/Logout */}
+              {!isAuthenticated ? (
+                <li className="nav-item px-lg-2">
+                  <Link 
+                    className="nav-link"
+                    to="/signup"
+                    onClick={closeNavbar}
+                  >
+                    Signup
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item px-lg-2">
+                  <button
+                    className="nav-link btn btn-link" // styled like a link
+                    onClick={handleLogout}
+                    style={{ border: 'none', background: 'none' }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+
+              {/* Other nav items */}
               <li className="nav-item px-lg-2">
                 <Link
                   className="nav-link"
@@ -87,6 +139,7 @@ function Navbar() {
           </form>
         </div>
       </div>
+      <ToastContainer position="bottom-right" />
     </nav>
   );
 }

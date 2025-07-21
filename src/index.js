@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import { CookiesProvider } from 'react-cookie';
 
 
 import{BrowserRouter,Routes,Route} from "react-router-dom"
@@ -20,6 +21,8 @@ import NotFound from './NotFount';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <CookiesProvider>
+
   <BrowserRouter>
     <Navbar/>
     <Routes>
@@ -30,13 +33,11 @@ root.render(
         <Route path="/support" element={<SupportPage/>}/>
         <Route path="/products" element={<ProductPage/>}/>
          <Route path="/login" element={<Login/>}/>
-        
         <Route path="*" element={<NotFound/>}/>
     </Routes>
       <Footer/>
-
-
   </BrowserRouter>
+  </CookiesProvider>
   
 );
 
